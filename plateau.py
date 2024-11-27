@@ -16,17 +16,15 @@ class Plateau:
         self.grille[4][3]= 'X'
         self.affichage_grille() 
 
- 
-
-        
-        
-
+     
     def affichage_grille (self):
-        print (self.grille)
+        #print (self.grille)
+        print('    0   1   2   3   4   5   6   7 ')
         for i in range(8):
-            print('+---+---+---+---+---+---+---+---+')
-            print(f'| {self.grille[i][0]} | {self.grille[i][1]} | {self.grille[i][2]} | {self.grille[i][3]} | {self.grille[i][4]} | {self.grille[i][5]} | {self.grille[i][6]} | {self.grille[i][7]} |')
-        print('+---+---+---+---+---+---+---+---+')
+            
+            print('  +---+---+---+---+---+---+---+---+')
+            print(f'{i} | {self.grille[i][0]} | {self.grille[i][1]} | {self.grille[i][2]} | {self.grille[i][3]} | {self.grille[i][4]} | {self.grille[i][5]} | {self.grille[i][6]} | {self.grille[i][7]} |')
+        print('  +---+---+---+---+---+---+---+---+')
 
 
 
