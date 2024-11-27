@@ -3,39 +3,41 @@
 class Plateau:
     def __init__(self):
 
-        grille=[]
+        self.grille=[]
         for row in range(8):
             d=[]
             for col in range (8):
                 d.append(' ')
-            grille.append(d)
+            self.grille.append(d)
 
-        grille[3][3]= 'O'
-        grille[4][4]= 'O'
-        grille[3][4]= 'X'
-        grille[4][3]= 'X'
-        print(grille)
+        self.grille[3][3]= 'O'
+        self.grille[4][4]= 'O'
+        self.grille[3][4]= 'X'
+        self.grille[4][3]= 'X'
+        self.affichage_grille() 
 
  
 
         
         
 
+    def affichage_grille (self):
+        print (self.grille)
+
+        print('+---+---+')
+        print(f'| {self.grille[0][0]} | {self.grille[3][3]} |')
+        print('+---+---+')
 
 
 
 
 
 
+if __name__=="__main__":
 
 
+    p=Plateau()
 
-
-
-
-
-
-p=Plateau()
 
 
 
