@@ -1,2 +1,3 @@
 import plateau
 
+print('coucou')
