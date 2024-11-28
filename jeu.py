@@ -1,4 +1,4 @@
-2from  plateau import Plateau 
+from  plateau import Plateau 
 # class Plateau:
 #     def affiche_grille(self):
 #         pass
