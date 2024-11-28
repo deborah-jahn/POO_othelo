@@ -1,4 +1,4 @@
-from  plateau import Plateau 
+2from  plateau import Plateau 
 # class Plateau:
 #     def affiche_grille(self):
 #         pass
@@ -17,26 +17,26 @@ def detecte_fin_du_jeu():
 class Jeu():
     def __init__(self):
         
-        plateau = Plateau()
+        self.plateau = Plateau()
         #self.positionne_depart(plateau)
         #plateau.affichage_grille()
-        self.run_the_game(plateau)
-        self.affiche_scores(plateau)
+        self.run_the_game()
+        self.affiche_scores()
 
     def positionne_depart(self, board:Plateau):   #place les 4 premiers pions
         pass
 
-    def run_the_game(self, board:Plateau):
+    def run_the_game(self):
         fin=False
         compt=0
         while not fin :
             #verifie_si_coup_impossible()   avoir un marqueur joueur en cours2
             x,y = saisie_position()
-            board.grille[int(x)][int(y)]="X"
+            self.plateau.grille[int(x)][int(y)]="X"
             coup_valide= True             #coup_valide=coup_valide()
             if coup_valide :
                 retourne_pions_encadres()
-                board.affichage_grille()
+                self.plateau.affichage_grille()
                 if detecte_fin_du_jeu() :
                     fin=True
                 else :
@@ -45,7 +45,7 @@ class Jeu():
                 print("coup non valide !")
             if compt>1 : fin=True
 
-    def affiche_scores(self, board:Plateau):
+    def affiche_scores(self):
         print("le jeu est fini")
  
 
