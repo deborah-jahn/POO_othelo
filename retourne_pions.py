@@ -1,4 +1,4 @@
-from  plateau import Plateau 
+from  plateau_d import Plateau 
 # class Plateau:
 #     def affiche_grille(self):
 #         pass
@@ -26,3 +26,19 @@ def retourne_pions_encadres(self, x, y, joueur, CV):
             CV[direction] = len(pions_a_retourner)
 
     return CV
+
+
+# def retourne(nombre,list en string avec les coordonees x e y de chaque pion dans le plateau, joueu_actif et le plateau)
+
+def retourne_pions (n_pion_tourner, list_str_x_y_pions, joueur_actif,Plateau):
+    for coord in list_str_x_y_pions [:n_pion_tourner]:
+            x, y = map(int, coord.split(','))
+            self.grille[x][y] = joueur_actif
+
+        self.affichage_grille ()
+
+
+if __name__=="__main__" :   
+     
+plateau = Plateau()
+plateau.retourner_pions(nb_pions=3,liste_coord=["3,4", "4,4", "5,5"],joueur_actif="X")
