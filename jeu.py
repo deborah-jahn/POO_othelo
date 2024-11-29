@@ -1,14 +1,16 @@
 from  plateau import Plateau 
 # class Plateau:   def affiche_grille(self):   pass
 
-def saisie_position(plat,joueur):
+def saisie_position(plat,joueur, taille_tab):
     fin = False
     while not fin :
-        texte ="Joueur "+ joueur+"          saisir X:"
-        x=input(texte)
-        texte ="Joueur "+ joueur+"          saisir Y:"
-        y=input(texte)
-        if plat.grille[int(x)][int(y)]!=" ":
+        texte ="Joueur "+ joueur+"     saisir X:"
+        x=int(input(texte))
+        texte ="        "+ "     saisir Y:"
+        y=int(input(texte))
+        if y<0 or  y> taille_tab-1 or x<0 or x> taille_tab-1 :
+            print("valeur en dehors du tableau")
+        elif plat.grille[int(x)][int(y)]!=" ":
             print("case non valide, pion present")
         else : fin = True
     return x,y
@@ -18,8 +20,8 @@ def  valide (plat, taille_tab, joueur_actif, non_joueur, pion_valid:dict, x, y, 
     coord=""
     fin = False
     nb_pion_non_joueur=0
-    while not fin and y>= 0 and y<= taille_tab and x>=0 and x<= taille_tab:
- #       print('fin',fin, "x ",x, "y ",y, "platxy :", plat.grille[x][y], ":")
+    while not fin and y>= 0 and y< taille_tab and x>=0 and x< taille_tab:
+        print('fin',fin, "x ",x, "y ",y, "platxy :", plat.grille[x][y], ":")
         if plat.grille[x][y] == blanc :  # une case vide, pas de pion joueur non actif encadre
             nb_pion_non_joueur=0
             coord=""
@@ -29,6 +31,10 @@ def  valide (plat, taille_tab, joueur_actif, non_joueur, pion_valid:dict, x, y, 
             coord= coord+ str(x)+" "+str(y)+" "
             x+=movX
             y+=movY
+            if x<0 or x>taille_tab-1 or y<0 or y>taille_tab-1 :  #apres x pions non_joueur , on attend un bord du plateau donc on annule tout
+                coord=""
+                nb_pion_non_joueur=0
+                fin=True
         elif plat.grille[x][y] == joueur_actif :
             if nb_pion_non_joueur >0 :
                 fin = True              #on a trouvé des pions encadrés :))
@@ -129,17 +135,22 @@ def coup_valide(plat, taille_tab, joueur_actif, pion_valid:dict, x, y) :
     return nbtotal, list_coord
     
 
-def retourne_pions_encadres():
-    pass
+def retourne_pions_encadres(plat,list_pions_a_retourner, joueur_actif):
+    valeurs = list(map(int, list_pions_a_retourner.split()))
+    for i in range(0, len(valeurs), 2):
+        if i + 1 < len(valeurs):
+            plat.grille[valeurs[i]][valeurs[i + 1]]= joueur_actif
+ #           print(valeurs[i], valeurs[i+1], plat.grille[valeurs[i]][valeurs[i + 1]])
+
 def detecte_fin_du_jeu():
     pass
 
 class Jeu():
     def __init__(self):
-        #taille_tab=input("saisir taille du tableau nombre pair:")
-        taille_tab=8
-        self.plateau = Plateau(8)  #initialise le plateau + 4 pions de depart
-        self.run_the_game(taille_tab)
+        taille_tab=input("saisir taille du tableau nombre pair:")
+        #taille_tab=8
+        self.plateau = Plateau(int(taille_tab))  #initialise le plateau + 4 pions de depart
+        self.run_the_game(int(taille_tab))
         self.affiche_scores()
 
          
@@ -155,7 +166,7 @@ class Jeu():
         joueur_actif="X"
         while not fin :
             #verifie_si_coup_impossible()   avoir un marqueur joueur en cours2
-            x,y = saisie_position(self.plateau, joueur_actif)
+            x,y = saisie_position(self.plateau, joueur_actif, taille_tab)
             temp =self.plateau.grille[int(x)][int(y)]
             self.plateau.grille[int(x)][int(y)]=joueur_actif
             self.plateau.affichage_grille()
@@ -163,7 +174,7 @@ class Jeu():
             list_pions_a_retourner=""
             nb_pion_a_retourner, list_pions_a_retourner = coup_valide(self.plateau, taille_tab, joueur_actif, CV, int(x), int(y))
             if nb_pion_a_retourner>0 :    #il y a des coups valides car nb_pion_encadre >0
-                #retourne_pions_encadres(self.plateau, nb_pion_a_retourner,list_pions_a_retourner, joueur_actif)
+                retourne_pions_encadres(self.plateau,list_pions_a_retourner, joueur_actif)
                 self.plateau.affichage_grille()
                 if detecte_fin_du_jeu() :
                     fin=True

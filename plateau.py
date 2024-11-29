@@ -39,7 +39,7 @@ class Plateau:
             ligne = f" {i}" if len(str(i)) == 1 else f"{i}"
             texte=0
             for k in range (self.taille):
-                texte="|  "+str(self.grille[k][i])
+                texte="| "+str(self.grille[k][i])+" "
                 ligne=ligne+texte
             ligne=ligne +"|" 
             print(ligne)
