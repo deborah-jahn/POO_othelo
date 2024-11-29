@@ -138,7 +138,7 @@ class Jeu():
     def __init__(self):
         #taille_tab=input("saisir taille du tableau nombre pair:")
         taille_tab=8
-        self.plateau = Plateau()  #initialise le plateau + 4 pions de depart
+        self.plateau = Plateau(8)  #initialise le plateau + 4 pions de depart
         self.run_the_game(taille_tab)
         self.affiche_scores()
 
